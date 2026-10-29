@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Weave",
+    "slug": "weave",
+    "scheme": "weave",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "backgroundColor": "#FFFFFF"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

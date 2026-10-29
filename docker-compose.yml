@@ -1,0 +1,36 @@
+services:
+  api:
+    image: python:3.11-slim
+    working_dir: /app
+    command: sh -c "pip install -r apps/api/requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir apps/api"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      APP_ENV: development
+      JWT_SECRET: dev-secret-change-me
+      SQLITE_PATH: /app/apps/data/weave.db
+      AI_PROVIDER: ${AI_PROVIDER:-local-dev-rule-analyzer}
+      AI_BASE_URL: ${AI_BASE_URL:-}
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_TEXT_MODEL: ${AI_TEXT_MODEL:-}
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: weave
+      POSTGRES_PASSWORD: weave
+      POSTGRES_DB: weave
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:

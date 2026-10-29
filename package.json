@@ -1,0 +1,17 @@
+{
+  "name": "weave-mvp-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/expo"
+  ],
+  "scripts": {
+    "dev:expo": "npm --workspace @weave/expo run start",
+    "dev:expo:web": "npm --workspace @weave/expo run web",
+    "dev:api": "uvicorn app.main:app --port 8000 --app-dir apps/api",
+    "dev": "npm run dev:expo",
+    "build": "npm --workspace @weave/expo run typecheck",
+    "preview": "npm run dev:expo:web"
+  }
+}
